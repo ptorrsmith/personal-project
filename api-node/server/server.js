@@ -11,10 +11,14 @@ const server = express()
 // server.use(express.static(path.join(__dirname, '../public')))
 
 // Routes for resources
+const homeRoutes = require('./routes/homeRoutes')
 const thingsRoutes = require('./routes/thingsRoutes')
+const membersRoutes = require('./routes/membersRoutes')
 
 // define resoure api endpoints and base routes
+server.use('/', homeRoutes)
 server.use('/api/v1/things', thingsRoutes)
+server.use('/api/v1/members', membersRoutes)
 
 
 //make server available to index.js
