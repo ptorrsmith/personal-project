@@ -1,5 +1,6 @@
 const path = require('path')
 
+const bodyParser = require('body-parser')
 // const cors = require('cors')
 
 // Express server to handle route requests
@@ -9,6 +10,11 @@ const server = express()
 
 // setup public directory (not sure if needed), so not enabling yet
 // server.use(express.static(path.join(__dirname, '../public')))
+
+server.use(bodyParser.json())
+server.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 // Routes for resources
 const homeRoutes = require('./routes/homeRoutes')
