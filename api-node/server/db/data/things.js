@@ -14,7 +14,7 @@ const things = [{
 },
 {
     id: 3,
-    name: 'Sleeping bag',
+    name: 'Sleeping Bag',
     daily_rate_in_cents: 700,
     owner_id: 2,
     qty: 4
