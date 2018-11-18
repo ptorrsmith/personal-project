@@ -10,6 +10,7 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            hello: "hello",
             things: [{
                 id: 0,
                 name: "nothing"
@@ -18,7 +19,12 @@ class App extends React.Component {
     }
 
     render(props) {
-        return <div>This is the App.jsx</div>
+        return(
+            <div>
+                <div>This is the App.jsx baby!</div>
+                <p>ID: { this.state.things[0].id }. Name: { this.state.things[0].name } </p>
+            </div>
+        )
     }
 }
 
