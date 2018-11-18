@@ -1,21 +1,6 @@
-const members = [{
-    id: 1,
-    name: 'Bob'
-},
-{
-    id: 2,
-    name: 'Sasha'
-},
-{
-    id: 3,
-    name: 'Bree'
-},
-{
-    id: 4,
-    name: 'Adrian'
-}
-]
 
+
+let members = require('./data/members')
 
 export function getMembers() {
     return members // to do filter by owner_id
