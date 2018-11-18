@@ -34,9 +34,6 @@ router.get('/member/:id', (req, res) => {
 })
 
 router.post('/new', (req, res) => {
-    // console.log("query: ", req.query)
-    // console.log("params: ", req.params)
-    // console.log("body: ", req.body)
     const thing = req.body
     // console.log("posted thing: ", thing)
     thingsDB.addThing(thing)
@@ -46,7 +43,6 @@ router.post('/new', (req, res) => {
         .catch(err => {
             res.status(301).json(err)
         })
-    // req.body ? res.status(200).send(req.body) : res.status(500).send("No body!!")
 })
 
 router.put('/:id', (req, res) => {
