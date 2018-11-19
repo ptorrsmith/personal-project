@@ -1,0 +1,56 @@
+html {
+    background-color: honeydew;
+    font-family: sans-serif;
+}
+
+
+.grid {
+    display: grid
+}
+
+nav {
+    grid-template-columns: 1fr 1fr 1fr;
+    border-radius: 5px;
+    /* border: solid 1px gray; */
+    text-align: center;
+    font-size: 2rem;
+}
+
+.navbar-item {
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: lightblue;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+.main {
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "movie-list movie-show";
+
+}
+
+.movie-list {
+    grid-area: movie-list;
+    padding: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: lemonchiffon;
+}
+
+.movie-show {
+    padding: 20px;
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: lemonchiffon;
+    ;
+    grid-area: movie-show;
+}
+
+footer {
+    text-align: center;
+    background-color: darkgray;
+}
