@@ -1,31 +1,43 @@
 import React from 'react'
 
+import ThingRow from './ThingRow'
+
 class ThingsList extends React.Component {
     constructor(props) {
         super(props)
-        console.log("THingsList constructor prpos: ", props)
+        // console.log("THingsList constructor prpos: ", props)
         this.state = {
             error: null,
-            things: props.things,
+            // things: props.things,
             selectedThings: []
         }
     }
 
-    componentWillReceiveProps(props) {
-        console.log("ThingsList componentWillReceiveProps props: ", this.props)
-    }
+    // componentWillReceiveProps(props) {
+    //     console.log("ThingsList componentWillReceiveProps props: ", this.props)
+    // }
 
     render() {
-        return(
+        return (
             <React.Fragment>
-                <p>List of {this.props.things.length} things to go here</p>
-                {console.log("ThingsList.render: state", this.state.things.length, this.state)}
-                {console.log("ThingsList.render: props appState: ", this.props.appState)}
-                {console.log("ThingsList.render: props things: ", this.props.appState.things)}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Daily rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.props.things.map(thing => {
+                            return <ThingRow key={thing.id} thing={thing} />
+                        })}
+                    </tbody>
+                </table>
             </React.Fragment>
         )
     }
-
 }
 
 export default ThingsList
