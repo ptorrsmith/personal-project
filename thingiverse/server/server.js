@@ -10,14 +10,18 @@ const express = require('express')
 // instantiate single instance of express server
 const server = express()
 
-// setup public directory (not sure if needed), so not enabling yet
-// server.use(express.static(path.join(__dirname, '../public')))
 
-server.use(cors({ origin: 'http://localhost:8081' }))
+// server.use(cors({ origin: 'http://localhost:8081' }))
 server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({
     extended: true
 }));
+server.use(cors({ origin: 'http://localhost:8080' }))
+
+
+// setup public directory 
+server.use(express.static(path.join(__dirname, '../public')))
+
 
 // Routes for resources
 const homeRoutes = require('./routes/homeRoutes')

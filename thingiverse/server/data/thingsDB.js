@@ -8,7 +8,7 @@ module.exports = {
   deleteThing
 }
 
-let things = require('./data/things')
+// let things = require('./data/things')
 
 const config = require('../../knexfile').development // [environment]
 const connection = require('knex')(config)
