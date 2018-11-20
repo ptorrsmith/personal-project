@@ -15,12 +15,8 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            error: 'no error',
-            hello: "hello",
-            things: [{
-                id: 0,
-                name: "nothing"
-            }]
+            error: null,
+            things: []
         }
 
         this.refreshList = this.refreshList.bind(this)
@@ -59,21 +55,21 @@ class App extends React.Component {
 
 
     render(props) {
-        return(
+        return (
             <Router>
-            <React.Fragment>
-            <div>
-            <Header appState={this.state} {...props} />
-            <ErrorMessage error={this.state.error} />
-                <h2>Welcome to thingiverse</h2>
-                {console.log("App.render: state things: ", this.state.things)}
-                <p>There are {this.state.things.length} Things</p>
-                {/*<p>Id: { this.state.things[0].id }. Name: { this.state.things[0].name } </p> */}
-                {console.log("About to render ThingsList ")}
-            <ThingsList appState={this.state} things={this.state.things} />
-            <Footer appState={this.state} {...props}   />
-            </div>
-            </React.Fragment>
+                <React.Fragment>
+                    <div>
+                        <Header appState={this.state} {...props} />
+                        <ErrorMessage error={this.state.error} />
+                        <h2>Welcome to thingiverse</h2>
+                        {console.log("App.render: state things: ", this.state.things)}
+                        <p>There are {this.state.things.length} Things</p>
+                        {/*<p>Id: { this.state.things[0].id }. Name: { this.state.things[0].name } </p> */}
+                        {console.log("About to render ThingsList ")}
+                        <ThingsList appState={this.state} things={this.state.things} />
+                        <Footer appState={this.state} {...props} />
+                    </div>
+                </React.Fragment>
             </Router>
         )
     }

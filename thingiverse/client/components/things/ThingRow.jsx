@@ -10,7 +10,6 @@ const ThingRow = (props) => {
       <td>{thing.id}</td>
       <td>{thing.name}</td>
       <td>{thing.description}</td>
-      <td>{thing.daily_rate_in_cents / 100}</td>
     </tr>
   )
 }

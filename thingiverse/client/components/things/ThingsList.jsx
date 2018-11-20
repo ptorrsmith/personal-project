@@ -26,7 +26,6 @@ class ThingsList extends React.Component {
                             <th>id</th>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Daily rate</th>
                         </tr>
                     </thead>
                     <tbody>
