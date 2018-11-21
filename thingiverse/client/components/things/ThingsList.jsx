@@ -18,7 +18,7 @@ class ThingsList extends React.Component {
     // }
 
     render() {
-        return (
+        return(
             <React.Fragment>
                 <table>
                     <thead>
@@ -30,6 +30,7 @@ class ThingsList extends React.Component {
                     </thead>
                     <tbody>
                         {this.props.things.map(thing => {
+                        console.log("ThingsList render thing: ",thing)
                             return <ThingRow key={thing.id} thing={thing} />
                         })}
                     </tbody>

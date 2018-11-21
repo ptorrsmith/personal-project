@@ -25,10 +25,18 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        // console.log("App.componentDidMount")
+        console.log("App.componentDidMount", this.props, "STATE", this.state)
         this.refreshList()
     }
 
+    shouldComponentUpdate() {
+        console.log("Should component mount", this.props || "No props")
+        return true
+    }
+
+    componentDidUpdate() {
+        console.log("componentDidUpdate", this.props, "STATE", this.state)
+    }
     // refreshList() {
     //     getThings(this.refreshThings) // attempt using promises did not work :-(
     // }
@@ -47,6 +55,7 @@ class App extends React.Component {
         console.log("calling api getThings")
         getThings()
             .then(things => {
+                console.log("RefreshList: ", this.props, " State: ", this.state)
                 console.log("App.refreshList: got things: setting state ", things)
                 this.setState({
                     things: things
@@ -56,20 +65,23 @@ class App extends React.Component {
 
     render() {
         console.log("App render props", this.props)
-        return (
+        return(
             <Router>
                 {/* <React.Fragment> */}
                 <div>
                     <Header appState={this.state} {...this.props} />
                     <ErrorMessage error={this.state.error} />
                     <Route exact path='/' render={() => <Redirect to='/things' />} />
-                    <Route exact path='/things' component={() => <ThingsList things={this.state.things} />} />
-                    <Route path='/thing/:id' component={(props) => {
-                        // console.log("App thing things: ", this.state.things)
-                        // console.log("App Props: ", props)
-                        return <ThingView things={this.state.things} {...props} />
+                    <Route exact path='/things' component={(props) => <ThingsList things={this.state.things} />} />
+                    <Route exact path='/things/:id' component={(props) => {
+                        console.log("App things/id: things: ", this.state.things)
+                        console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
+                        if (props.match && props.match.params && props.match.params.id) {
+                            const id = props.match.params.id
+                            const thing = this.state.things.find( thing => thing.id == id)
+                            return <ThingView thing={thing} {...props} />
+                        }
                     }} />
-
 
                     {/* <Route path='/thing/:id' component={(props) => {
                         console.log("App thing things: ", this.state.things)

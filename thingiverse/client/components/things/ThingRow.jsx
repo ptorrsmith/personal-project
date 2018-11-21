@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 
 const ThingRow = (props) => {
   const thing = props.thing
-  return (
+  return(
     <tr>
       <td>{thing.id}</td>
-      <td><Link to={`/thing/${thing.id}`}>{thing.name}</Link></td>
+      <td><Link to={`/things/${thing.id}`}>{thing.name}</Link></td>
       <td>{thing.description}</td>
     </tr>
   )
