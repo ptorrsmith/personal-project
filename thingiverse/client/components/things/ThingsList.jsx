@@ -5,7 +5,7 @@ import ThingRow from './ThingRow'
 class ThingsList extends React.Component {
     constructor(props) {
         super(props)
-        // console.log("THingsList constructor prpos: ", props)
+        console.log("THingsList constructor prpos: ", props)
         this.state = {
             error: null,
             // things: props.things,

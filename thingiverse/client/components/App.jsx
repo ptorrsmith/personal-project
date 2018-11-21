@@ -6,6 +6,7 @@ import Header from './layouts/Header'
 import Footer from './layouts/Footer'
 import ErrorMessage from './helpers/ErrorMessage'
 import ThingsList from './things/ThingsList'
+import ThingView from './things/ThingView'
 
 import { getThings } from '../api-client'
 
@@ -53,23 +54,33 @@ class App extends React.Component {
             })
     }
 
-
-    render(props) {
+    render() {
+        console.log("App render props", this.props)
         return (
             <Router>
-                <React.Fragment>
-                    <div>
-                        <Header appState={this.state} {...props} />
-                        <ErrorMessage error={this.state.error} />
-                        <h2>Welcome to thingiverse</h2>
-                        {console.log("App.render: state things: ", this.state.things)}
-                        <p>There are {this.state.things.length} Things</p>
-                        {/*<p>Id: { this.state.things[0].id }. Name: { this.state.things[0].name } </p> */}
-                        {console.log("About to render ThingsList ")}
-                        <ThingsList appState={this.state} things={this.state.things} />
-                        <Footer appState={this.state} {...props} />
-                    </div>
-                </React.Fragment>
+                {/* <React.Fragment> */}
+                <div>
+                    <Header appState={this.state} {...this.props} />
+                    <ErrorMessage error={this.state.error} />
+                    <Route exact path='/' render={() => <Redirect to='/things' />} />
+                    <Route exact path='/things' component={() => <ThingsList things={this.state.things} />} />
+                    <Route path='/thing/:id' component={(props) => {
+                        // console.log("App thing things: ", this.state.things)
+                        // console.log("App Props: ", props)
+                        return <ThingView things={this.state.things} {...props} />
+                    }} />
+
+
+                    {/* <Route path='/thing/:id' component={(props) => {
+                        console.log("App thing things: ", this.state.things)
+                        console.log("App Props: ", props)
+                        return <ThingView thing={this.state.things.find(thing => thing.id == props.match.params.id)} {...props} />
+                    }} /> */}
+
+                    {/* <Route path='/thing/:id' blah="Blah" component={ThingView} /> */}
+                    <Footer appState={this.state} {...this.props} />
+                </div>
+                {/* </React.Fragment> */}
             </Router>
         )
     }

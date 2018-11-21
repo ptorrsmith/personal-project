@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
 // functional component for each table row
 
 
@@ -8,7 +9,7 @@ const ThingRow = (props) => {
   return (
     <tr>
       <td>{thing.id}</td>
-      <td>{thing.name}</td>
+      <td><Link to={`/thing/${thing.id}`}>{thing.name}</Link></td>
       <td>{thing.description}</td>
     </tr>
   )
