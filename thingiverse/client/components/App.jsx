@@ -15,9 +15,14 @@ class App extends React.Component {
 
     constructor(props) {
         super(props)
+        // null object
         this.state = {
             error: null,
-            things: []
+            things: [{
+                id: 0,
+                name: "nothing",
+                description: ""
+            }]
         }
 
         this.refreshList = this.refreshList.bind(this)
@@ -78,7 +83,7 @@ class App extends React.Component {
                         console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
                         if (props.match && props.match.params && props.match.params.id) {
                             const id = props.match.params.id
-                            const thing = this.state.things.find( thing => thing.id == id)
+                            const thing = this.state.things.find( thing => thing.id == id)  // bloody = vs == and === !!
                             return <ThingView thing={thing} {...props} />
                         }
                     }} />
