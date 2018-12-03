@@ -2,8 +2,8 @@
 import request from 'superagent'
 
 // const port = process.env.PORT || 8080
-console.log("api-client")
-console.log("process.env: ", process.env)
+// console.log("api-client")
+// console.log("process.env: ", process.env)
 // const thingsAPIBaseURL = 'http://edaptorrsmith.ddns.net:8080/api/v1'
 const thingsAPIBaseURL = '/api/v1'
 
@@ -19,7 +19,7 @@ export function getThings() {
             console.log("Got some promising things >>>> ", things)
             return things
         })
-        // .catch(err => console.log("error from API>>>>>>", err))
+    // .catch(err => console.log("error from API>>>>>>", err))
 }
 
 // export function getThings(callback) {
@@ -33,3 +33,8 @@ export function getThings() {
 //             callback(err, res.body)
 //         })
 // }
+
+
+export default {
+    getThings
+}

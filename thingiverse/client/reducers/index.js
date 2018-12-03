@@ -1,5 +1,8 @@
-import { combineReducers } from 'redux-devtools' // just the combine reducers property/function
+import { combineReducers } from 'redux' // just the combine reducers property/function
 // import other reducers
+import things from './thingsReducer'
 
 
-export default combine
+export default combineReducers({
+  things
+})

@@ -1,46 +1,68 @@
 // no need to import redux
 // import libs/code for thunks
+
+// will need to rename getThings 
+// import { getThings } from '../api-client'
+import api from '../api-client'
+
+
 // import other actions we might want to dispatch
 
 // export constants for ACTIONS
 
-export const GET_THINGS = 'GET_THINGS' // ask API for things (plural)
-export const RECEIVE_THINGS = 'RECEIVE_THINGS' // when receive full (?) refresh of things
-export const SAVE_THING = 'SAVE_THING' // save new or update existing thing
-export const THING_SAVED = 'THING_SAVED' // when confirm things saved/updated, and receive it back
+export const GETTING_THINGS = 'GETTING_THINGS' // ask API for things (plural)
+export const RECEIVED_THINGS = 'RECEIVED_THINGS' // when receive full (?) refresh of things
+export const ADDING_THING = 'ADDING_THING' // save new or update existing thing
+export const UPDATING_THING = 'UPDATING_THING' // save new or update existing thing
+// export const THING_ADDED = 'THING_ADDED' // when confirm things saved/updated, and receive it back
+// export const THING_UPDATED = 'THING_UPDATED' // when confirm things saved/updated, and receive it back
 export const THINGS_ERROR = 'THINGS_ERROR' // API error on get or save/update
 // export const GET_THING = 'GET_THING' // ask API for things (singular)
 // export const RECEIVE_THING = 'RECEIVE THING' // when receive requested thing
 
 // make action creators, to wrap payload with action type
 
-export function getThings(user) {
+export function gettingThings(user) { // could pass in search options object instead
   return {
-    type: GET_THINGS,
-    user: user
+    type: GETTING_THINGS,
+    user: user  // not sure this is needed.  
   }
 }
 
-export function receiveThings(things) {
+export function receivedThings(things) {
   return {
-    type: RECEIVE_THINGS,
+    type: RECEIVED_THINGS,
     things: things
   }
 }
 
-export function saveThing(thing) {
+export function addingThing(thing) {
   return {
-    type: SAVE_THING,
+    type: ADDING_THING,
     thing: thing
   }
 }
 
-export function thingsSaved(thing) {
+export function updateThing(thing) {
   return {
-    type: THING_SAVED,
+    type: UPDATING_THING,
     thing: thing
   }
 }
+
+// export function thingAdded(thing) {
+//   return {
+//     type: THING_ADDED,
+//     thing: thing
+//   }
+// }
+
+// export function thingUpdated(thing) {
+//   return {
+//     type: THING_UPDATED,
+//     thing: thing
+//   }
+// }
 
 export function thingsError(error) {
   return {
@@ -48,7 +70,6 @@ export function thingsError(error) {
     error: error
   }
 }
-
 
 // export function getThing(id) {
 //   return {
@@ -65,3 +86,17 @@ export function thingsError(error) {
 //     thing: thing
 //   }
 // }
+
+
+// THUNKS
+
+export function fetchThings() {
+  return dispatch => {
+    dispatch(gettingThings()) // spinner
+    api.getThings()
+      .then(things => {
+        // create RECEIVED_THINGS action with things payload
+        dispatch(receivedThings(things))  // and thingsReducer will refresh state
+      })
+  }
+}
