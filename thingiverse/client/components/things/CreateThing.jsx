@@ -10,19 +10,61 @@ class CreateThing extends React.Component {
         // console.log("CreateThing constructor: props: ", props)
         super(props)
         // console.log("CreateTHing constructor prpos: ", props)
-        this.state = {
 
+        // initial local state if needed
+        this.state = {
+            name: '',
+            description: ''
         }
+
+        // bind any local functions
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+
 
     // componentWillReceiveProps(props) {
     //     console.log("CreateThing componentWillReceiveProps props: ", this.props)
     // }
 
+    handleChange(e) {
+        console.log(e.target)
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        // dispatch all in local state to create new thing
+        console.log("State: ", this.state)
+    }
+
     render() {
         return (
             <React.Fragment>
-                <p>A form will go here to create a thing</p>
+                <h3>Create Thing</h3>
+
+                <form onSubmit={this.handleSubmit}>
+
+                    <fieldset>
+                        <legend>Create your thing</legend>
+
+                        <label htmlFor="name">Name</label><br />
+                        <input id="name" name="name" value={this.state.name} onChange={this.handleChange} />
+                        <br />
+                        <label htmlFor="description">Description</label><br />
+                        <input id="description" name="description" value={this.state.description} onChange={this.handleChange} />
+
+                        <button>Submit</button>
+
+                    </fieldset>
+
+                </form>
+
+
             </React.Fragment>
         )
     }
@@ -46,8 +88,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(CreateThing)
-// export default connect(mapStateToProps, mapDispatchToProps)(CreateThing)
-// export default connect(mapStateToProps)(App)
+                    // export default connect(mapStateToProps, mapDispatchToProps)(CreateThing)
+                    // export default connect(mapStateToProps)(App)
 
 
 
