@@ -4,5 +4,5 @@ import things from './thingsReducer'
 
 
 export default combineReducers({
-  things
+    things: things
 })

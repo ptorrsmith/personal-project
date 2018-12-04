@@ -4,11 +4,13 @@ import ThingRow from './ThingRow'
 
 class ThingsList extends React.Component {
     constructor(props) {
+        console.log("ThingsList constructor: props: ", props)
         super(props)
         console.log("THingsList constructor prpos: ", props)
         this.state = {
             error: null,
             // things: props.things,
+            things: [],
             selectedThings: []
         }
     }
@@ -29,7 +31,7 @@ class ThingsList extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.things.map(thing => {
+                        {this.props.things && this.props.things.map(thing => {
                         console.log("ThingsList render thing: ",thing)
                             return <ThingRow key={thing.id} thing={thing} />
                         })}

@@ -20,6 +20,7 @@ import { fetchThings } from '../actions/thingActions'
 class App extends React.Component {
 
     constructor(props) {
+        console.log("App constructing")
         super(props)
         // null object
         this.state = {
@@ -87,8 +88,8 @@ class App extends React.Component {
     // 
     render() {
         console.log("App render props", this.props)
-        const things = this.props.things
-        return (
+        const things = this.props.things.things
+        return(
             <Router>
                 {/* <React.Fragment> */}
                 <div>
@@ -96,10 +97,13 @@ class App extends React.Component {
                     <ErrorMessage error={this.state.error} />
                     <Route exact path='/' render={() => <Redirect to='/things' />} />
                     {/* <Route exact path='/things' component={(props) => <ThingsList things={this.state.things} />} /> */}
-                    <Route exact path='/things' component={(props) => <ThingsList things={things} />} />
+                    <Route exact path='/things' component={(props) => {
+                        console.log("App: Things:", things) 
+                        return <ThingsList things = { things }
+                        />}} />
                     <Route exact path='/things/:id' component={(props) => {
-                        console.log("App things/id: things: ", this.state.things)
-                        console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
+                        // console.log("App things/id: things: ", this.state.things)
+                        // console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
                         if (props.match && props.match.params && props.match.params.id) {
                             const id = props.match.params.id
                             const thing = this.props.things.find(thing => thing.id == id)  // bloody = vs == and === !!
@@ -128,8 +132,9 @@ const mapStateToProps = (state) => {
     return state
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return dispatch
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return dispatch
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
