@@ -100,3 +100,24 @@ export function fetchThings() {
       })
   }
 }
+
+export function addThing(data) {
+  return dispatch => {
+    dispatch(addingThing()) // spinner
+    api.addThing(data)
+      .then(response => response.body)
+      .then(id => {
+        console.log("thingsActions, addThing Thunk, got body of ", body, " And response of: ", response)
+
+        const newThingId = id
+
+        // we have the id of the thing, so we want to refresh state with revised list from api
+        // and we want to navigate to the thing we added 
+        api.getThings()
+          .then(things => {
+            dispatch(receivedThings(things))  // and thingsReducer will refresh state
+          })
+      })
+    // .then redirect to the added thing (/things/new-thing-id)
+  }
+}

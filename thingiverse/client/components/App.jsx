@@ -7,6 +7,7 @@ import Footer from './layouts/Footer'
 import ErrorMessage from './helpers/ErrorMessage'
 import ThingsList from './things/ThingsList'
 import ThingView from './things/ThingView'
+import CreateThing from './things/CreateThing'
 
 // For Redux State
 import { connect } from 'react-redux' // to map state and dispatch to props
@@ -23,24 +24,24 @@ class App extends React.Component {
         // console.log("App constructing")
         super(props)
         // null object
-        this.state = {
-            error: null,
-            things: [{
-                id: 0,
-                name: "nothing",
-                description: ""
-            }]
-        }
-
-        // this.refreshList = this.refreshList.bind(this)
+        // this.state = {
+        //     error: null,
+        //     things: [{
+        //         id: 0,
+        //         name: "nothing",
+        //         description: ""
+        //     }]
     }
+
+    // this.refreshList = this.refreshList.bind(this)
+
 
     componentDidMount() {
         // console.log("App.componentDidMount", this.props, "STATE", this.state)
 
         //Redux way... get things into global state
 
-        this.props.fetchThings()
+        this.props.fetchThings()  // though not used in the App component, will be available to all components that map to it
 
         // old way
         // this.refreshList()
@@ -64,14 +65,11 @@ class App extends React.Component {
                 {/* <React.Fragment> */}
                 <div>
                     <Header appState={this.state} {...this.props} />
-                    <ErrorMessage error={this.state.error} />
+                    <ErrorMessage error={this.props.error} />
                     <Route exact path='/' render={() => <Redirect to='/things' />} />
                     {/* <Route exact path='/things' component={(props) => <ThingsList things={this.state.things} />} /> */}
-                    <Route exact path='/things' component={(props) => {
-                        // console.log("App: Things:", things)
-                        return <ThingsList things={things}
-                        />
-                    }} />
+                    <Route exact path='/things' component={ThingsList} />
+                    <Route exact path='/things/new' component={CreateThing} />
                     <Route exact path='/things/:id' component={(props) => {
                         // console.log("App things/id: things: ", this.state.things)
                         // console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
@@ -93,7 +91,10 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    return { things: state.things.things } // return only the properties we want, in a simple accessible way
+    return {
+        things: state.things.things,
+        errorMessage: state.errorMessage
+    } // return only the properties we want, in a simple accessible way
 }
 
 const mapDispatchToProps = (dispatch) => {

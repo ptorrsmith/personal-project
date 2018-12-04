@@ -2,6 +2,9 @@ import React from 'react'
 
 import ThingRow from './ThingRow'
 
+import { connect } from 'react-redux'
+
+// could be functional component, but may in future need local state, e.g. selectedThings
 class ThingsList extends React.Component {
     constructor(props) {
         // console.log("ThingsList constructor: props: ", props)
@@ -42,4 +45,27 @@ class ThingsList extends React.Component {
     }
 }
 
-export default ThingsList
+
+const mapStateToProps = (state) => {
+    return {
+        things: state.things.things
+    } // return only the properties we want, in a simple accessible way
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//     // console.log("mAPPING dispatch to props")
+//     return ({
+//         // object with properties for simple helper functions that call dispatch, keepting component code simpler
+//         fetchThings: () => {
+//             // console.log("About to fetch things")
+//             dispatch(fetchThings())
+//         }
+//     })
+// }
+
+export default connect(mapStateToProps)(ThingsList)
+// export default connect(mapStateToProps, mapDispatchToProps)(ThingsList)
+// export default connect(mapStateToProps)(App)
+
+
+
