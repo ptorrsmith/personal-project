@@ -15,12 +15,12 @@ import { connect } from 'react-redux' // to map state and dispatch to props
 import { fetchThings } from '../actions/thingActions'
 
 // import { getThings } from '../api-client'
-
+// no longer required
 
 class App extends React.Component {
 
     constructor(props) {
-        console.log("App constructing")
+        // console.log("App constructing")
         super(props)
         // null object
         this.state = {
@@ -36,60 +36,30 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.log("App.componentDidMount", this.props, "STATE", this.state)
+        // console.log("App.componentDidMount", this.props, "STATE", this.state)
 
         //Redux way... get things into global state
 
-        this.props.dispatch(fetchThings())
-
+        this.props.fetchThings()
 
         // old way
-
         // this.refreshList()
     }
 
     shouldComponentUpdate() {
-        console.log("Should component mount", this.props || "No props")
+        // console.log("Should component mount", this.props || "No props")
         return true
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate", this.props, "STATE", this.state)
+        // console.log("componentDidUpdate", this.props, "STATE", this.state)
     }
 
-    // refreshList() {
-    //     getThings(this.refreshThings) // attempt using promises did not work :-(
-    // }
-
-    // refreshThings(err, things) { // this only as using promises not working :-(
-    //     // console.log("got some things: ", things)
-    //     this.setState({
-    //         error: 'still no error',
-    //         things: things 
-    //     }, (console.log("AFter set state, state is ", this.state)))
-    // }
-
-
-    // TO BE REPLACED BY DISPATCH GET_THINGS ACTION
-    // refreshList() {
-
-    //     // getThings(this.renderThings)
-    //     // console.log("calling api getThings")
-    //     // getThings()
-    //     //     .then(things => {
-    //     //         console.log("RefreshList: ", this.props, " State: ", this.state)
-    //     //         console.log("App.refreshList: got things: setting state ", things)
-    //     //         this.setState({
-    //     //             things: things
-    //     //         })
-    //     //     })
-    // }
-
-    // 
     render() {
-        console.log("App render props", this.props)
-        const things = this.props.things.things
-        return(
+        // console.log("App render props", this.props)
+        // const things = this.props.things.things // before mapping state to props and returning only things collection
+        const things = this.props.things
+        return (
             <Router>
                 {/* <React.Fragment> */}
                 <div>
@@ -98,9 +68,10 @@ class App extends React.Component {
                     <Route exact path='/' render={() => <Redirect to='/things' />} />
                     {/* <Route exact path='/things' component={(props) => <ThingsList things={this.state.things} />} /> */}
                     <Route exact path='/things' component={(props) => {
-                        console.log("App: Things:", things) 
-                        return <ThingsList things = { things }
-                        />}} />
+                        // console.log("App: Things:", things)
+                        return <ThingsList things={things}
+                        />
+                    }} />
                     <Route exact path='/things/:id' component={(props) => {
                         // console.log("App things/id: things: ", this.state.things)
                         // console.log("App things/id: render Props:>>>>>>>>>>>> ", props)
@@ -111,13 +82,6 @@ class App extends React.Component {
                             return <ThingView thing={thing} {...props} />
                         }
                     }} />
-
-                    {/* <Route path='/thing/:id' component={(props) => {
-                        console.log("App thing things: ", this.state.things)
-                        console.log("App Props: ", props)
-                        return <ThingView thing={this.state.things.find(thing => thing.id == props.match.params.id)} {...props} />
-                    }} /> */}
-
                     {/* <Route path='/thing/:id' blah="Blah" component={ThingView} /> */}
                     <Footer appState={this.state} {...this.props} />
                 </div>
@@ -129,12 +93,19 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    return state
+    return { things: state.things.things } // return only the properties we want, in a simple accessible way
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return dispatch
-// }
+const mapDispatchToProps = (dispatch) => {
+    // console.log("mAPPING dispatch to props")
+    return ({
+        // object with properties for simple helper functions that call dispatch, keepting component code simpler
+        fetchThings: () => {
+            // console.log("About to fetch things")
+            dispatch(fetchThings())
+        }
+    })
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App)
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+// export default connect(mapStateToProps)(App)

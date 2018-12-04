@@ -9,14 +9,14 @@ const thingsAPIBaseURL = '/api/v1'
 
 
 export function getThings() {
-    console.log("api about to call get things", thingsAPIBaseURL + '/things/')
+    // console.log("api about to call get things", thingsAPIBaseURL + '/things/')
 
-    // console.log("api-client getThings from " + thingsAPIBaseURL + "'/' ")
+    // // console.log("api-client getThings from " + thingsAPIBaseURL + "'/' ")
     return request
         .get(thingsAPIBaseURL + '/things/')
         .then(res => res.body) // or .then({body:things} => {})
         .then(things => { // or simply .then(things)
-            console.log("Got some promising things >>>> ", things)
+            // console.log("Got some promising things >>>> ", things)
             return things
         })
     // .catch(err => console.log("error from API>>>>>>", err))

@@ -8,7 +8,7 @@ export default class ErrorMessage extends React.Component {
   render() {
     const { error } = this.props
     let errorView = null
-    console.log("Error is: ", error)
+    // console.log("Error is: ", error)
     if (error) {
       errorView = (
         <div className='error'>

@@ -48,10 +48,10 @@ router.post('/new', (req, res) => {
 router.put('/:id', (req, res) => {
     const id = req.params.id
     const thing = req.body
-    if(thing.id == id) {
+    if (thing.id == id) {
         thingsDB.updateThing(thing)
             .then(updateCount => {
-                console.log("Update count result: >>>> ", updateCount)
+                // console.log("Update count result: >>>> ", updateCount)
                 res.status(201).json(updateCount)
             })
             .catch(err => {

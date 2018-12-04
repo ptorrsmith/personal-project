@@ -18,19 +18,19 @@ const store = createStore(combinedReducer, compose(applyMiddleware(thunkMiddlewa
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 // const store = createStore(combinedReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
-console.log("client index.js Created Store")
+// console.log("client index.js Created Store")
 // our main app
 import App from './components/App'
 
-console.log("client index adding event listener")
+// console.log("client index adding event listener")
 
 document.addEventListener('DOMContentLoaded', () => {
     // ReactDOM.render(
-    console.log("client index event listener fired")
-    console.log("Provider", Provider)
+    // console.log("client index event listener fired")
+    // console.log("Provider", Provider)
     render(
         <Provider store={store}>
-                    <App />
+            <App />
         </Provider>,
         document.getElementById('app')
     )
